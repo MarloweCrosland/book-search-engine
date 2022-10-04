@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from '@apollo/client';
 //this is the same as the test mutation we wrote using apollo studio explorer.
 //we wrap the entire code in backticks and assign it to a variable so it
 //can be reused anywhere we need in front end.
