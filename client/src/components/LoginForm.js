@@ -1,18 +1,19 @@
-import React, { useState } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
+// see SignupForm.js for commen
+import React, { useState, useEffect } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
 
-import { useMutation } from "@apollo/react-hooks";
-import Auth from "../utils/auth";
-import { LOGIN_USER } from "../utils/mutations";
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
+
+import Auth from '../utils/auth';
 
 const LoginForm = () => {
-  //login form functionality includes taking the user input, validating it,
-  //and making alerts if the users data isnt correct,
-  const [userFormData, setUserFormData] = useState({ email: "", password: "" });
+  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
-  const [loginUser, { error }] = useMutation(LOGIN_USER);
+  const [login, { error }] = useMutation(LOGIN_USER);
+
   useEffect(() => {
     if (error) {
       setShowAlert(true);

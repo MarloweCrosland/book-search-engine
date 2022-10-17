@@ -12,7 +12,7 @@ import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
-//establish a new link to graphql server at its endpoint with createHttpLink
+// Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -30,19 +30,14 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-//use apollo client constructor to instantiate the apollo client instance
-//and create the connection to the API endpoint.
 const client = new ApolloClient({
-  link: httpLink,
-  //instantiate a new cache object
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
-
 function App() {
   return (
-     // wrap the entire jsx code with <ApolloProvider> and pass in client variable.
-    //now everything inside has access to the servers API data through the client we set up.
     <ApolloProvider client={client}>
       <Router>
         <>
